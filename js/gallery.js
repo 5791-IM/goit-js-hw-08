@@ -90,4 +90,36 @@ function handleImg(event) {
   if (!event.target.classList.contains("gallery-image")) {
     return;
   }
+  const original = event.target.dataset.source;
+  const description = event.target.alt;
+
+  if (instance) {
+    instance.element().querySelector(".gallery-image").src = original;
+    instance.element().querySelector(".gallery-image").alt = description;
+  } else {
+    instance = basicLightbox.create(
+      `<div>
+        <img class="gallery-img" src="${original}" alt="${description}"/>
+      </div>`,
+      {
+        onShow: () => {
+          document.addEventListener("keydown", closeOnEscape);
+        },
+        onClose: () => {
+          document.removeEventListener("keydown", closeOnEscape);
+        },
+      }
+    );
+  }
+  instance.show();
 }
+
+function closeOnEscape(event) {
+  if (event.code === "Escape" && instance) {
+    instance.close();
+  }
+}
+
+document.querySelectorAll(".gallery-image").forEach((img) => {
+  img.addEventListener("click", handleImg);
+});
