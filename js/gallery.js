@@ -95,6 +95,7 @@ function handleImg(event) {
 
   if (instance) {
     instance.element().querySelector(".gallery-image").src = original;
+
     instance.element().querySelector(".gallery-image").alt = description;
   } else {
     instance = basicLightbox.create(
