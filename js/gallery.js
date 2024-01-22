@@ -94,9 +94,8 @@ function handleImg(event) {
   const description = event.target.alt;
 
   if (instance) {
-    instance.element().querySelector(".gallery-image").src = original;
-
-    instance.element().querySelector(".gallery-image").alt = description;
+    instance.element().querySelector(".gallery-img").src = original;
+    instance.element().querySelector(".gallery-img").alt = description;
   } else {
     instance = basicLightbox.create(
       `<div>
